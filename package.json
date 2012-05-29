@@ -1,0 +1,23 @@
+{
+  "name": "draft",
+  "description": "A draft site scaffold for rapid front-end development.",
+  "preferGlobal": true,
+  "version": "0.0.1",
+  "scripts": {
+    "start": "coffee app.coffee"
+  },
+  "main": "./lib/app.coffee",
+  "bin": "./bin/draft",
+  "dependencies": {
+    "coffee-script": "*",
+    "stylus": "*",
+    "eco": "*",
+    "express": "*",
+    "underscore": "*",
+    "optimist": "*"
+  },
+  "engines": {
+    "node": "0.6 || 0.7 || 0.8",
+    "npm": "1"
+  }
+}
