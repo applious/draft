@@ -9,10 +9,10 @@ Can run a static site in any directory from a single server: `draft --port 8000`
 Examples
 --------
 
-`draft`
-`draft --port 8000`
-`draft -p 80`
-`draft --port 8000 ~/Projects/MyApp/`
+* `draft`
+* `draft --port 8000`
+* `draft -p 80`
+* `draft --port 8000 ~/Projects/MyApp/`
 
 
 Expects
@@ -27,7 +27,6 @@ to all templates.
 
 Example file structure:
 
-```
 * public/
   * index.html
   * styles/
@@ -43,4 +42,3 @@ Example file structure:
   * templates/
     * layout.eco
     * about.eco
-```
