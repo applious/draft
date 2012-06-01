@@ -32,6 +32,9 @@ module.exports = (options) ->
       dump: true
     @use express.logger 'dev'
 
+  app.get '/', (req, res) ->
+    res.render 'index'
+
   app.get /^\/(.+?)\.html$/, (req, res) ->
     res.render req.params[0]
 
