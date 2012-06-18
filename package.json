@@ -1,5 +1,5 @@
 {
-  "name": "draft",
+  "name": "applious-draft",
   "description": "A draft site scaffold for rapid front-end development.",
   "preferGlobal": true,
   "version": "0.0.1",
@@ -7,7 +7,7 @@
     "start": "coffee app.coffee"
   },
   "main": "./lib/app.coffee",
-  "bin": "./bin/draft",
+  "bin": "./bin/applious-draft",
   "dependencies": {
     "coffee-script": "*",
     "stylus": "*",

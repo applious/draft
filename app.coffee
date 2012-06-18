@@ -7,11 +7,11 @@ eco = require 'eco'
 module.exports = (options) ->
   app = express.createServer()
 
-  { cwd, port } = options
+  { cwd, port, input, output } = options
 
   app.configure ->
-    public_path = path.join(cwd, 'public')
-    src_path = path.join(cwd, 'src')
+    public_path = path.join(cwd, output)
+    src_path = path.join(cwd, input)
     @use stylus.middleware
       debug: true
       src: src_path
