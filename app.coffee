@@ -3,29 +3,54 @@ path = require 'path'
 express = require 'express'
 stylus = require 'stylus'
 eco = require 'eco'
+fs = require 'fs'
+
+copyDirStructureSync = (srcPath, destPath) ->
+  srcPathStat = fs.statSync(srcPath)
+
+  try
+    fs.mkdirSync(destPath, srcPathStat.mode)
+  catch err
+    throw err if err.code isnt 'EEXIST'
+
+  filePaths = fs.readdirSync(srcPath)
+
+  for filePath in filePaths
+    srcFilePath = path.join(srcPath, filePath)
+    fileStat = fs.statSync(srcFilePath)
+
+    if fileStat.isDirectory()
+      destFilePath = path.join(destPath, filePath)
+      copyDirStructureSync(srcFilePath, destFilePath)
 
 module.exports = (options) ->
   app = express.createServer()
 
-  { cwd, port, input, output } = options
+  { cwd, port, src, dest } = options
 
   app.configure ->
-    public_path = path.join(cwd, output)
-    src_path = path.join(cwd, input)
+    destPath = path.join(cwd, dest)
+    srcPath = path.join(cwd, src)
+
+    unless path.existsSync(srcPath)
+      fs.mkdirSync(srcPath)
+
+    copyDirStructureSync(srcPath, destPath)
+
     @use stylus.middleware
       debug: true
-      src: src_path
-      dest: public_path
+      src: srcPath
+      dest: destPath
     @use express.compiler
-      src: src_path
-      dest: public_path
+      src: srcPath
+      dest: destPath
       enable: ['coffeescript']
-    @use express.static(public_path)
-    @use express.favicon(path.join(public_path, 'favicon.png'))
+    @use express.static(destPath)
+    @use express.favicon(path.join(destPath, 'favicon.png'))
     @register '.eco', eco
     @set 'view engine', 'eco'
     @set 'view options', layout: 'layout'
-    @set 'views', template_path = path.join(src_path, 'templates')
+    @set 'views', path.join(srcPath, 'templates')
     @use express.errorHandler
       stack: true
       message: true
