@@ -1,29 +1,31 @@
 DRAFT
 =====
 
-A draft site scaffold for rapid front-end development. Its a simple static node server for our front-end stack (coffee-script, stylus, eco).
+A draft site scaffold for rapid front-end development. Its a simple static node server for our front-end stack (coffee-script and stylus).
 
 Can run a static site in any directory from a single server: `draft --port 8000`
 
+Options
+-------
+* --port (number)   // the port number, defaults to 8000
+* --dir (string)    // the directory path, defaults to the directory you are in
+* --src (string)    // the source folder, defaults to 'src'
+* --public (string) // the public folder, defaults to 'public'
 
 Examples
 --------
 
 * `draft`
 * `draft --port 8000`
-* `draft -p 80`
-* `draft --port 8000 ~/Projects/MyApp/`
-
+* `draft --src bin --public www`
+* `draft --dir /Projects/MyApp/ --port 8000`
+* `sudo draft --port 80`
 
 Expects
 -------
 
 A `public` directory with any static assets such as javascript, css
-and html. A `src` directory with compilable files such as coffee-script, stylus, eco.
-
-Eco templates should be inside a `templates` directory in `src` and
-may optionally provide a parent template (`layout.eco`) to be applied
-to all templates.
+and html. A `src` directory with compilable coffee-script and stylus files.
 
 Example file structure:
 
@@ -39,6 +41,3 @@ Example file structure:
     * home.styl
   * scripts/
     * main.coffee
-  * templates/
-    * layout.eco
-    * about.eco
