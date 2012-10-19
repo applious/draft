@@ -1,0 +1,25 @@
+#!/usr/bin/env coffee
+
+path = require 'path'
+
+argv = require('optimist')
+  .usage('Usage: $0 --port=[8000] --source=[src/] --destination=[public/] [path]')
+  .default('port', 8000)
+  .default('source', 'src/')
+  .default('destination', 'public/')
+  .alias('port', 'p')
+  .alias('source', 's')
+  .alias('destination', 'd')
+  .argv
+
+cwd = argv._[0] or process.cwd()
+
+unless path.existsSync(cwd)
+  console.error 'Does not exist:', cwd
+  return
+
+app = require('../app')({
+  port: argv.port,
+  cwd: cwd,
+  src: argv.source, dest: argv.destination
+})
